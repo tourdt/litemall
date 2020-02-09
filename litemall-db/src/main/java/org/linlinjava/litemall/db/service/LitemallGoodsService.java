@@ -28,6 +28,9 @@ public class LitemallGoodsService {
      * @return
      */
     public List<LitemallGoods> queryByHot(int offset, int limit) {
+        if (limit < 0){
+            return new ArrayList<>();
+        }
         LitemallGoodsExample example = new LitemallGoodsExample();
         example.or().andIsHotEqualTo(true).andIsOnSaleEqualTo(true).andDeletedEqualTo(false);
         example.setOrderByClause("add_time desc");
@@ -44,6 +47,9 @@ public class LitemallGoodsService {
      * @return
      */
     public List<LitemallGoods> queryByNew(int offset, int limit) {
+        if (limit < 0){
+            return new ArrayList<>();
+        }
         LitemallGoodsExample example = new LitemallGoodsExample();
         example.or().andIsNewEqualTo(true).andIsOnSaleEqualTo(true).andDeletedEqualTo(false);
         example.setOrderByClause("add_time desc");
@@ -61,6 +67,9 @@ public class LitemallGoodsService {
      * @return
      */
     public List<LitemallGoods> queryByCategory(List<Integer> catList, int offset, int limit) {
+        if (limit < 0){
+            return new ArrayList<>();
+        }
         LitemallGoodsExample example = new LitemallGoodsExample();
         example.or().andCategoryIdIn(catList).andIsOnSaleEqualTo(true).andDeletedEqualTo(false);
         example.setOrderByClause("add_time  desc");
@@ -79,6 +88,9 @@ public class LitemallGoodsService {
      * @return
      */
     public List<LitemallGoods> queryByCategory(Integer catId, int offset, int limit) {
+        if (limit < 0){
+            return new ArrayList<>();
+        }
         LitemallGoodsExample example = new LitemallGoodsExample();
         example.or().andCategoryIdEqualTo(catId).andIsOnSaleEqualTo(true).andDeletedEqualTo(false);
         example.setOrderByClause("add_time desc");

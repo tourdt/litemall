@@ -152,6 +152,9 @@ public class WxHomeController {
 
     private List<Map> getCategoryList() {
         List<Map> categoryList = new ArrayList<>();
+        if (SystemConfig.getCatlogListLimit() < 0){
+            return categoryList;
+        }
         List<LitemallCategory> catL1List = categoryService.queryL1WithoutRecommend(0, SystemConfig.getCatlogListLimit());
         for (LitemallCategory catL1 : catL1List) {
             List<LitemallCategory> catL2List = categoryService.queryByPid(catL1.getId());

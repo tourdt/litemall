@@ -12,6 +12,7 @@ import org.linlinjava.litemall.wx.vo.GrouponRuleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,6 +33,9 @@ public class WxGrouponRuleService {
 
 
     public List<GrouponRuleVo> queryList(Integer page, Integer size, String sort, String order) {
+        if (size < 0){
+            return new ArrayList<>();
+        }
         Page<LitemallGrouponRules> grouponRulesList = (Page)grouponRulesService.queryList(page, size, sort, order);
 
         Page<GrouponRuleVo> grouponList = new Page<GrouponRuleVo>();

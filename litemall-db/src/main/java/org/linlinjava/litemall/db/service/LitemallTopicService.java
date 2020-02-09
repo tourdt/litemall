@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,10 +21,14 @@ public class LitemallTopicService {
     private Column[] columns = new Column[]{Column.id, Column.title, Column.subtitle, Column.price, Column.picUrl, Column.readCount};
 
     public List<LitemallTopic> queryList(int offset, int limit) {
+
         return queryList(offset, limit, "add_time", "desc");
     }
 
     public List<LitemallTopic> queryList(int offset, int limit, String sort, String order) {
+        if (limit < 0){
+            return new ArrayList<>();
+        }
         LitemallTopicExample example = new LitemallTopicExample();
         example.or().andDeletedEqualTo(false);
         example.setOrderByClause(sort + " " + order);

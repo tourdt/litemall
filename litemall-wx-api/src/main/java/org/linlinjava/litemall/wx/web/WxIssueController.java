@@ -31,7 +31,7 @@ public class WxIssueController {
     @RequestMapping("/list")
     public Object list(String question,
                        @RequestParam(defaultValue = "1") Integer page,
-                       @RequestParam(defaultValue = "10") Integer size,
+                       @RequestParam(defaultValue = "20") Integer size,
                        @Sort @RequestParam(defaultValue = "add_time") String sort,
                        @Order @RequestParam(defaultValue = "desc") String order) {
         List<LitemallIssue> issueList = issueService.querySelective(question, page, size, sort, order);

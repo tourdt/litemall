@@ -10,6 +10,7 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,6 +20,9 @@ public class LitemallBrandService {
     private Column[] columns = new Column[]{Column.id, Column.name, Column.desc, Column.picUrl, Column.floorPrice};
 
     public List<LitemallBrand> query(Integer page, Integer limit, String sort, String order) {
+        if (limit < 0){
+            return new ArrayList<>();
+        }
         LitemallBrandExample example = new LitemallBrandExample();
         example.or().andDeletedEqualTo(false);
         if (!StringUtils.isEmpty(sort) && !StringUtils.isEmpty(order)) {
